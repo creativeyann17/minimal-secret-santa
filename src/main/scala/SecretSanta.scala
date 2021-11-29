@@ -1,14 +1,12 @@
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 class SecretSanta(path: String)(implicit separator: Char = ',', excludeSeparator: Char = '|') {
 
   val data: DataLoader.Data = DataLoader.load(path)(separator)
   val namesWithExclude: Map[String, List[String]] = getNamesWithExclude(data)
-  val results: Map[String, String] = doSecretSanta()
   
-  private def doSecretSanta(): Map[String, String] = {
+  def go(): Map[String, String] = {
     
     val results: mutable.Map[String, String] = mutable.Map()
     val available = mutable.ListBuffer().addAll(namesWithExclude.keys)
@@ -27,11 +25,15 @@ class SecretSanta(path: String)(implicit separator: Char = ',', excludeSeparator
       available -= to
     })
 
-    if (available.nonEmpty) { // we don't want that to happened
+    if (available.nonEmpty) { // we don't want that to happen
       throw new RuntimeException(s"Remaining people without gift: $available")
     }
     
     results.toMap
+  }
+  
+  def formatTemplate(template: String, from: String, to: String): String = {
+    DataLoader.loadTemplate(template).replace("{FROM}", from).replace("{TO}", to)
   }
   
   private def getNamesWithExclude(data: DataLoader.Data): Map[String, List[String]] = {

@@ -2,7 +2,9 @@ import org.apache.commons.csv.{CSVFormat, CSVRecord}
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
+import scala.io.Source
 import scala.jdk.CollectionConverters.CollectionHasAsScala
+import scala.util.{Failure, Success, Using}
 
 object DataLoader {
   
@@ -23,6 +25,10 @@ object DataLoader {
     reader.close()
 
     Data(headers, records)
+  }
+  
+  def loadTemplate(path: String): String = {
+    Using(Source.fromFile(path))(_.mkString).get
   }
 
 }

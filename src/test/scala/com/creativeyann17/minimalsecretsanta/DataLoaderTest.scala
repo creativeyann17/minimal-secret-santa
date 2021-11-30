@@ -1,3 +1,5 @@
+package com.creativeyann17.minimalsecretsanta
+
 import org.scalatest.funsuite.AnyFunSuite
 
 class DataLoaderTest extends AnyFunSuite {

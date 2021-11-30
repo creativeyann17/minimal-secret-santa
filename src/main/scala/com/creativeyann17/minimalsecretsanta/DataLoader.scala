@@ -1,10 +1,12 @@
+package com.creativeyann17.minimalsecretsanta
+
 import org.apache.commons.csv.{CSVFormat, CSVRecord}
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 import scala.io.Source
 import scala.jdk.CollectionConverters.CollectionHasAsScala
-import scala.util.{Failure, Success, Using}
+import scala.util.Using
 
 object DataLoader {
   

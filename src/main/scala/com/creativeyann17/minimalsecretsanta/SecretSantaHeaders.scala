@@ -1,3 +1,5 @@
+package com.creativeyann17.minimalsecretsanta
+
 sealed abstract class SecretSantaHeaders(val header: String)
 
 case object Name extends SecretSantaHeaders("NAME")
